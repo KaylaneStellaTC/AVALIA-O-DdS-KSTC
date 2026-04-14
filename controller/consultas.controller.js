@@ -1,9 +1,9 @@
-const animaisService = require('../services/consultas.service');
+const consultaService = require('../services/consultas.service');
 
 // GET /usuarios
 const listarConsultas = async (req, res) => {
   try {
-    const consulta = await consultaService.listarTodosConsultas();
+    const consulta = await consultaService.listarTodasConsultas();
     res.status(200).json({ total: animal.length, animal });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro interno ao listar consultas.' });
@@ -29,13 +29,19 @@ const buscarConsultasPorId = async (req, res) => {
 // POST /usuarios — Cadastra novo usuario
 const criarConsulta = async (req, res) => {
   try {
-    const { nome, email } = req.body;
-    const novoConsulta = await consultaService.criarconsulta({ nome, email });
+    const { animal_id,  data_consulta, motivo, diagnostico, veterinario } = req.body;
+    const novoConsulta = await consultaService.criarConsulta({ 
+      animal_id, 
+      data_consulta,
+       motivo,
+        diagnostico, 
+        veterinario
+        });
 
     // 201 = Created — status correto para criação bem-sucedida
     res.status(201).json({
-      mensagem: 'pet cadastrado com sucesso!',
-      animal: novoAnimal,
+      mensagem: 'consulta marcada com sucesso!',
+      consulta: novoConsulta,
     });
   } catch (erro) {
     // Se o Service lançou um erro de validação, retornamos 400
@@ -43,4 +49,4 @@ const criarConsulta = async (req, res) => {
   }
 };
 
-module.exports = { listarAnimais, buscarAnimaisPorId, criarAnimal };
+module.exports = { listarConsultas, buscarConsultasPorId, criarConsulta };

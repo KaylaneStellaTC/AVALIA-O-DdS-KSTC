@@ -2,13 +2,13 @@
 // Extrai dados do req, chama o Service e formata a resposta com res.
 // Nunca contém regra de negócio — apenas orquestração.
 
-const tutoresService = require('../services/tutores.services');
+const tutoreService = require('../services/tutores.services');
 
 // GET /livros — Lista todos os tutores
 const listarTutores = async (req, res) => {
   try {
-    const tutores = await tutorService.listarTodosTutores();
-    res.status(200).json({ total: tutores.length, tutores});
+    const tutor = await tutorService.listarTodosTutores();
+    res.status(200).json({ total: tutor.length, tutor});
   } catch (erro) {
     res.status(500).json({ erro: 'Erro interno ao listar tutores.' });
   }
@@ -19,7 +19,7 @@ const buscarTutoresPorId = async (req, res) => {
   try {
     // Extrai o parâmetro da URL — essa é a responsabilidade do Controller
     const { id } = req.params;
-    const tutor = await tutoresService.buscarTutoresPorId(id);
+    const tutor = await tutoreService.buscarTutoresPorId(id);
 
     // Se o Service retornou null, o livro não existe
     if (!tutor) {
@@ -39,12 +39,16 @@ const criarTutor = async (req, res) => {
   try {
     // Extrai os dados do corpo da requisição
     const { nome, telefone, email} = req.body;
-    const novoTutor = await tutoresService.criarTutor({nome, telefone, email});
+    const novoTutor = await tutoreService.criarTutor({
+      nome,
+      telefone, 
+      email
+    });
 
     // 201 = Created — status correto para criação bem-sucedida
     res.status(201).json({
       mensagem: 'tutor cadastrado no acervo com sucesso!',
-      livro: novoTutor,
+      tutor: novoTutor
     });
   } catch (erro) {
     // Se o Service lançou um erro de validação, retornamos 400

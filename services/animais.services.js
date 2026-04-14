@@ -6,7 +6,7 @@ try{
   const  resultado = await pool.query('SELECT*FROM animais ORDER BY id');
   return resultado.rows;
 }catch(error){
-console.log('erro ao digitar todos os animais',error.message)
+console.log('erro ao listar todos os animais',error.message)
 // throw err;
 // 
 };
@@ -36,4 +36,4 @@ try{
 }
 };
 
-module.exports = { listarTodosAnimais, buscarAnimaisPorId,adicionarAnimal  };
+module.exports = { listarTodosAnimais, buscarAnimaisPorId, adicionarAnimal};

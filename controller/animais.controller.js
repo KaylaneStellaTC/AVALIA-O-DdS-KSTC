@@ -1,4 +1,4 @@
-const animaisService = require('../services/animais.service');
+const animalService = require('../services/animais.service');
 
 // GET /usuarios
 const listarAnimais = async (req, res) => {
@@ -29,8 +29,14 @@ const buscarAnimaisPorId = async (req, res) => {
 // POST /usuarios — Cadastra novo usuario
 const criarAnimal = async (req, res) => {
   try {
-    const { nome, email } = req.body;
-    const novoAnimal = await animalService.criaranimal({ nome, email });
+    const { nome, especie, raca, data_nascimento, tutor_id } = req.body;
+    const novoAnimal = await animalService.criaranimal({
+      nome, 
+      especie, 
+      raca, 
+      data_nascimento, 
+      tutor_id
+    });
 
     // 201 = Created — status correto para criação bem-sucedida
     res.status(201).json({
