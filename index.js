@@ -1,6 +1,6 @@
 const express = require('express');
-const routes = require('./src/routes/index.routes');
-const { logger, errorHandler } = require('./src/middlewares/main.middlewares');
+const routes = require('./routes/index.routes');
+const { logger, errorHandler } = require('./middlewares/main.middlewares');
 
 const app = express();
 

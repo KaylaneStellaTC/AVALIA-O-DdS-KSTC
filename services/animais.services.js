@@ -1,4 +1,4 @@
-const pool = require ('../database/connections')
+const pool = require ('../database/db')
   
 // Lista todos os livros do acervo
 const listarTodosAnimais = async () => {

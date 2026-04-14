@@ -1,4 +1,4 @@
-const animalService = require('../services/animais.service');
+const animalService = require('../services/animais.services');
 
 // GET /usuarios
 const listarAnimais = async (req, res) => {
