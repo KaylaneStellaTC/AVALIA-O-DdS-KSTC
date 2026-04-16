@@ -3,8 +3,8 @@ const animalService = require('../services/animais.services');
 // GET /usuarios
 const listarAnimais = async (req, res) => {
   try {
-    const animal = await animalService.listarTodosAnimais();
-    res.status(200).json({ total: animal.length, animal });
+    const animais = await animalService.listarTodosAnimais();
+    res.status(200).json({ total: animais.length, animais });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro interno ao listar pets.' });
   }
@@ -14,13 +14,13 @@ const listarAnimais = async (req, res) => {
 const buscarAnimaisPorId = async (req, res) => {
   try {
     const { id } = req.params;
-    const animal = await animalService.buscarAnimaisPorId(id);
+    const animais = await animalService.buscarAnimaisPorId(id);
 
-    if (!animal) {
+    if (!animais){
       return res.status(404).json({ erro: `pet ${id} não encontrado.` });
     }
 
-    res.status(200).json({ animal });
+    res.status(200).json({ animais });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro interno ao buscar pet.' });
   }
@@ -41,7 +41,7 @@ const criarAnimal = async (req, res) => {
     // 201 = Created — status correto para criação bem-sucedida
     res.status(201).json({
       mensagem: 'pet cadastrado com sucesso!',
-      animal: novoAnimal,
+      animais: novoAnimal,
     });
   } catch (erro) {
     // Se o Service lançou um erro de validação, retornamos 400

@@ -7,8 +7,8 @@ const tutoreService = require('../services/tutores.services');
 // GET /livros — Lista todos os tutores
 const listarTutores = async (req, res) => {
   try {
-    const tutor = await tutorService.listarTodosTutores();
-    res.status(200).json({ total: tutor.length, tutor});
+    const tutores = await tutorService.listarTodosTutores();
+    res.status(200).json({ total: tutores.length, tutores });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro interno ao listar tutores.' });
   }

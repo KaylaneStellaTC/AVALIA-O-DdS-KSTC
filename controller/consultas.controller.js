@@ -3,8 +3,8 @@ const consultaService = require('../services/consultas.services');
 // GET /usuarios
 const listarConsultas = async (req, res) => {
   try {
-    const consulta = await consultaService.listarTodasConsultas();
-    res.status(200).json({ total: animal.length, animal });
+    const consultas = await consultaService.listarTodasConsultas();
+    res.status(200).json({ total: consultas.length, consultas });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro interno ao listar consultas.' });
   }
@@ -14,13 +14,13 @@ const listarConsultas = async (req, res) => {
 const buscarConsultasPorId = async (req, res) => {
   try {
     const { id } = req.params;
-    const consulta = await consultaService.buscarConsultasPorId(id);
+    const consultas = await consultaService.buscarConsultasPorId(id);
 
-    if (!consulta) {
+    if (!consultas) {
       return res.status(404).json({ erro: `consulta ${id} não encontrado.` });
     }
 
-    res.status(200).json({ consulta });
+    res.status(200).json({ consultas });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro interno ao buscar consulta.' });
   }
@@ -41,7 +41,7 @@ const criarConsulta = async (req, res) => {
     // 201 = Created — status correto para criação bem-sucedida
     res.status(201).json({
       mensagem: 'consulta marcada com sucesso!',
-      consulta: novoConsulta,
+      consultas: novoConsulta,
     });
   } catch (erro) {
     // Se o Service lançou um erro de validação, retornamos 400

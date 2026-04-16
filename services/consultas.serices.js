@@ -5,12 +5,12 @@ const listarTodasConsultas = async () => {
 
 // Busca uma consulta específica pelo ID
 const buscarConsultasPorId = async (id) => {
-  const consulta = consultas.find((item) => item.id === Number(id));
-  return consulta || null;
+  const consultas = consultas.find((item) => item.id === Number(id));
+  return consultas || null;
 };
 
 // Criar uma nova consulta
-const criarConsulta = async ({ id, animal_id, data_consulta, motivo, diagnosico,
+const criarConsulta = async ({ animal_id, data_consulta, motivo, diagnosico,
 veterinario}) => {
   if (!data_consulta || !animal_id || !veterinario) {
     throw new Error('Data da consulta, ID do animal e ID do veterinário são obrigatórios.');

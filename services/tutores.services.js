@@ -1,12 +1,12 @@
 // Lista todos os tutores
 const listarTodosTutores = async () => {
-  return tutor;
+  return tutores;
 };
 
 // Busca um tutor específico pelo ID
 const buscartutoresPorId = async (id) => {
-  const tutor = tutor.find((item) => item.id === Number(id));
-  return tutor || null;
+  const tutores = tutores.find((item) => item.id === Number(id));
+  return tutores || null;
 };
 
 // Criar um novo tutores
@@ -20,7 +20,7 @@ const criarTutor = async ({ nome, telefone, email }) => {
     telefone,
     email,
   };
-  tutor.push(novoTutor);
+  tutores.push(novoTutor);
   return novoTutor;
 };
 
