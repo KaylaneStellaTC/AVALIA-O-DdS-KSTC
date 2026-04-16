@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "AVALIACAO-DdS-KSTC",
+			"path": "."
+		},
+		{
+			"name": "middlewares",
+			"path": "../biblioteca_DdS_KSTC/src/middlewares"
+		},
+		{
+			"name": "routes",
+			"path": "../biblioteca_DdS_KSTC/src/routes"
+		}
+	],
+	"settings": {}
+}
