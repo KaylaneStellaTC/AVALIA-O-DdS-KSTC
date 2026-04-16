@@ -1,30 +1,42 @@
 // Lista todas as consultas
+
+const pool = require ('../database/db')
+
 const listarTodasConsultas = async () => {
-  return consultas;
+ try{
+  const  resultado = await pool.query('SELECT*FROM consultas ORDER BY id');
+  return resultado.rows;
+}catch(error){
+console.log('erro ao listar todos os consultas',error.message)
+// throw err;
+// 
+}
 };
 
 // Busca uma consulta específica pelo ID
 const buscarConsultasPorId = async (id) => {
-  const consultas = consultas.find((item) => item.id === Number(id));
-  return consultas || null;
+  const resultado = await pool.query ('SELECT *FROM consultas WHERE id = $1',[id,]);
+  return resultado.rows[0]
+
 };
 
 // Criar uma nova consulta
 const criarConsulta = async ({ animal_id, data_consulta, motivo, diagnosico,
 veterinario}) => {
-  if (!data_consulta || !animal_id || !veterinario) {
-    throw new Error('Data da consulta, ID do animal e ID do veterinário são obrigatórios.');
-  }
-  const novaConsulta = {
-    id: consultas.length + 1,
-    data_consulta,
-    animal_id,
-    motivo,
-    diagnosico,
-    veterinario
-  };
-  consultas.push(novaConsulta);
-  return novaConsulta;
+ try{
+  const query = `INSERT INTO consultas (animal_id, data_consulta, motivo, diagnosico,
+veterinario) VALUES ($1, $2,$3, $4, $5)RETURNING*`;
+  const res = await  pool.query ([ animal_id, data_consulta, motivo, diagnosico,
+veterinario ])
+     return res.rows[0];
+}catch(error){
+  console.log('erro ao adicinar consulta', error.message)
+}
 };
 
 module.exports = { listarTodasConsultas, buscarConsultasPorId, criarConsulta };
+
+
+
+
+

@@ -9,8 +9,9 @@
 const CHAVE_ACESSO = 'veterinaria';
 
 const autenticar = (req, res, next) => {
-  // O cliente envia: Authorization: Bearer biblioteca-ralph-teddy-2025
+  // O cliente envia: Authorization: Bearer <chave>
   const authHeader = req.headers['authorization'];
+  const tutorIdHeader = req.headers['x-tutor-id'];
 
   if (!authHeader) {
     return res.status(401).json({
@@ -26,6 +27,16 @@ const autenticar = (req, res, next) => {
     return res.status(403).json({
       erro: 'Acesso proibido. Crachá inválido ou vencido.',
     });
+  }
+
+  if (tutorIdHeader) {
+    const tutorId = Number(tutorIdHeader);
+    if (Number.isNaN(tutorId) || tutorId <= 0) {
+      return res.status(400).json({
+        erro: 'Cabeçalho X-Tutor-Id inválido.',
+      });
+    }
+    req.tutorId = tutorId;
   }
 
   // Token válido — libera a passagem para o próximo posto
